@@ -5,7 +5,7 @@ import errno
 import posixpath
 import shutil
 
-from airflow.hooks.base_hook import BaseHook
+from airflow.hooks.base import BaseHook
 
 from airflow_fs.ports import glob
 
