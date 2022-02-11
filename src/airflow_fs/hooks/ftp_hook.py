@@ -15,10 +15,11 @@ from . import FsHook
 class FtpHook(FsHook):
     """Hook for interacting with files over FTP."""
 
-    def __init__(self, conn_id):
+    def __init__(self, conn_id, ps_mode = False):
         super().__init__()
         self._conn_id = conn_id
         self._conn = None
+        self._ps_mode = ps_mode
 
     def get_conn(self):
         if ftputil is None:
@@ -32,6 +33,7 @@ class FtpHook(FsHook):
 
             session_factory = ftp_session.session_factory(
                 base_class=base_class,
+                use_passive_mode=self._ps_mode,
                 port=config.port or 21,
                 encrypt_data_channel=secure)
 
